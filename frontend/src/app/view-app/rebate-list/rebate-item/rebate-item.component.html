@@ -1,0 +1,6 @@
+<div class="content">
+  <div class="logo" *ngIf="logo" [style.background-image]="'url(\''+logo+'\')'"></div>
+  <div class="title">{{title}}</div>
+  <span class="status" *ngIf="status">Connected</span>
+  <span class="status not" *ngIf="!status">You need to connect.</span>
+</div>

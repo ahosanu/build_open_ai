@@ -1,0 +1,624 @@
+<div class="main">
+  <header>
+    <!--<button type="button" class="close" data-modal-toggle="authentication-modal">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+      </svg>
+    </button>-->
+    <h2>{{title}}</h2>
+    <img src="{{logo}}"/>
+  </header>
+  <div class="content">
+
+    <mat-stepper [linear]="isLinear" #stepper>
+
+      <mat-step label="Information">
+        <div class="container">
+          <section class="my_from " [formGroup]="fromView">
+
+
+            <div class="field">
+              <label>When do you expect to (or when did you) buy the contact lenses?</label>
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+            </div>
+
+            <div class="field">
+              <label>Would you like to be reminded to claim the rebate message?</label>
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">By Text Message</mat-radio-button>
+                <mat-radio-button value="2">By Email</mat-radio-button>
+              </mat-radio-group>
+
+            </div>
+
+            <div class="field">
+              <label>Do you know how the deadline to claim the rebate (you may update this later)?</label>
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker2">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+
+            </div>
+
+
+          </section>
+
+
+          <div class="btn_group">
+            <button mat-raised-button matStepperNext color="primary">Next</button>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step label="Rebate Code Check">
+        <div class="grid_col">
+          <div class="left_chat">
+            <div class="from_field">
+              <form class="my_from" [formGroup]="fromView_final">
+                <mat-form-field>
+                  <mat-label>Enter Offer Code</mat-label>
+                  <input matInput formControlName="first_name">
+                  <mat-hint>Include the dash as shown, either XX-XXXXX or XXXX-XXXX</mat-hint>
+                </mat-form-field>
+              </form>
+            </div>
+            <div class="btn_group">
+              <button mat-raised-button matStepperPrevious color="primary">Back</button>
+              <button mat-raised-button matStepperNext color="primary">Next</button>
+            </div>
+          </div>
+        </div>
+
+
+      </mat-step>
+
+      <mat-step label="Upload your receipt / invoice">
+
+        <div class="grid_col">
+          <div class="left_chat">
+            <div class="from_field">
+              <form class="my_from" [formGroup]="fromView_final">
+
+                <div class="file-upload">
+                  <h3>Purchase Receipt / Invoice from your Eye Care Provider showing date, contact lens, box quantity
+                    and price.</h3>
+                  <label for="upload-invoice" class="upload_label" *ngIf="!selectedInvoiceFile">
+                    <div class="upload">
+                      <p>Click and Upload your file.</p>
+                      <span class="material-icons">cloud_upload</span>
+                      <p class="af">Accepted file formats: JPEG, PNG, PDF, BMP <br/>Max file size: 20MB</p>
+                    </div>
+                  </label>
+
+                  <div class="file" *ngIf="selectedInvoiceFile">
+                    <span class="material-icons file_info">description</span>
+                    <div class="info">
+                      <p class="name">{{selectedInvoiceFile.name}}</p>
+                      <p>{{formatBytes(selectedInvoiceFile.size)}}</p>
+                    </div>
+
+                    <span class="material-icons close">close</span>
+                  </div>
+                  <input type="file" (change)="uploadInvoice($event)" id="upload-invoice"/>
+                </div>
+
+                <div class="file-upload">
+                  <h3>Eye Exam / Lens Fitting from your Eye Care Provider showing patient eye exam, fitting or
+                    refraction was completed.</h3>
+                  <label for="upload-lens" class="upload_label" *ngIf="!selectedLensFile">
+                    <div class="upload">
+                      <p>Click and Upload your file.</p>
+                      <span class="material-icons">cloud_upload</span>
+                      <p class="af">Accepted file formats: JPEG, PNG, PDF, BMP <br/>Max file size: 20MB</p>
+                    </div>
+                  </label>
+
+                  <div class="file" *ngIf="selectedLensFile">
+                    <span class="material-icons file_info">description</span>
+                    <div class="info">
+                      <p class="name">{{selectedLensFile.name}}</p>
+                      <p>{{formatBytes(selectedLensFile.size)}}</p>
+                    </div>
+
+                    <span class="material-icons close">close</span>
+                  </div>
+                  <input type="file" (change)="uploadLens($event)" id="upload-lens"/>
+                </div>
+
+                <div class="file-upload">
+                  <h3>Box End Panel showing prescription information. You may upload a single image with two end panels
+                    (left and right eyes).</h3>
+                  <label for="upload-box" class="upload_label" *ngIf="!selectedBoxFile">
+                    <div class="upload">
+                      <p>Click and Upload your file.</p>
+                      <span class="material-icons">cloud_upload</span>
+                      <p class="af">Accepted file formats: JPEG, PNG, PDF, BMP <br/>Max file size: 20MB</p>
+                    </div>
+                  </label>
+
+                  <div class="file" *ngIf="selectedBoxFile">
+                    <span class="material-icons file_info">description</span>
+                    <div class="info">
+                      <p class="name">{{selectedBoxFile.name}}</p>
+                      <p>{{formatBytes(selectedBoxFile.size)}}</p>
+                    </div>
+
+                    <span class="material-icons close">close</span>
+                  </div>
+                  <input type="file" (change)="uploadBox($event)" id="upload-box"/>
+                </div>
+
+
+                <div class="file-upload">
+                  <h3>Box End Panel showing prescription information.</h3>
+                  <label for="upload-box-prescription" class="upload_label" *ngIf="!selectedBoxPrescriptionFile">
+                    <div class="upload">
+                      <p>Click and Upload your file.</p>
+                      <span class="material-icons">cloud_upload</span>
+                      <p class="af">Accepted file formats: JPEG, PNG, PDF, BMP <br/>Max file size: 20MB</p>
+                    </div>
+                  </label>
+
+                  <div class="file" *ngIf="selectedBoxPrescriptionFile">
+                    <span class="material-icons file_info">description</span>
+                    <div class="info">
+                      <p class="name">{{selectedBoxPrescriptionFile.name}}</p>
+                      <p>{{formatBytes(selectedBoxPrescriptionFile.size)}}</p>
+                    </div>
+
+                    <span class="material-icons close">close</span>
+                  </div>
+                  <input type="file" (change)="uploadBoxPrescription($event)" id="upload-box-prescription"/>
+                </div>
+
+              </form>
+            </div>
+            <div class="btn_group">
+              <button mat-raised-button matStepperPrevious color="primary">Back</button>
+              <button mat-raised-button matStepperNext color="primary">Next</button>
+            </div>
+          </div>
+        </div>
+
+
+      </mat-step>
+      <mat-step label="Confirm your purchase is eligible">
+
+
+        <div class="grid_col">
+
+          <div class="view_forms">
+
+            <div class="from_field">
+              <form class="my_from" [formGroup]="fromPatient">
+
+                <mat-form-field>
+                  <mat-label>Patient First Name</mat-label>
+                  <input matInput formControlName="first_name">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Patient Last Name</mat-label>
+                  <input matInput formControlName="last_name">
+                </mat-form-field>
+
+
+                <mat-form-field>
+                  <mat-label>Select Purchase Location (May be under Doctor's name)</mat-label>
+                  <input matInput formControlName="location" [matAutocomplete]="auto" (keyup)="getList($event)">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option width="100%" *ngFor="let option of locationNames" [value]="option.value">
+                      <div class="display">
+                        <div class="name">{{option.name}}</div>
+                        <div class="address">{{option.address}}</div>
+                      </div>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+
+                <mat-form-field>
+                  <mat-label>Invoice/Receipt number</mat-label>
+                  <input matInput formControlName="invoice_num">
+                </mat-form-field>
+
+
+                <div class="field">
+                  <label>Eye Exam Date</label>
+                  <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker_exam" formControlName="exam_date">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker_exam"></mat-datepicker-toggle>
+                    <mat-datepicker #picker_exam></mat-datepicker>
+                  </mat-form-field>
+
+                </div>
+
+
+                <div class="field">
+                  <label>Contact Lens Purchase Date</label>
+                  <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker_lens" formControlName="lens_purchase_date">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker_lens"></mat-datepicker-toggle>
+                    <mat-datepicker #picker_lens></mat-datepicker>
+                  </mat-form-field>
+
+                </div>
+
+                <!--
+
+                                <mat-form-field>
+                                  <mat-label>Rebate Mailing City</mat-label>
+                                  <input matInput formControlName="city">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Rebate Mailing State</mat-label>
+                                  <input matInput formControlName="state">
+                                </mat-form-field>
+
+
+                                <mat-form-field>
+                                  <mat-label>Rebate Program / Nature of Installation</mat-label>
+                                  <select matNativeControl required formControlName="rebate_program">
+                                    <option value="Replaced gas appliance with new gas appliance">Replaced gas appliance with new gas
+                                      appliance
+                                    </option>
+                                    <option value="Switched from electric appliance to new gas appliance">Switched from electric
+                                      appliance
+                                      to new gas appliance
+                                    </option>
+                                    <option value="Other">Other</option>
+                                  </select>
+                                </mat-form-field>
+
+
+                                -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;
+
+                                <mat-form-field>
+                                  <mat-label>Account Number</mat-label>
+                                  <input matInput formControlName="account_number">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Service Address</mat-label>
+                                  <input matInput formControlName="service_address">
+                                </mat-form-field>
+
+
+                                <mat-form-field>
+                                  <mat-label>Service Address Apartment / Suite #</mat-label>
+                                  <input matInput formControlName="service_suite"
+                                  >
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Service Address City</mat-label>
+                                  <input matInput formControlName="sevice_city">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Service Address State</mat-label>
+                                  <input matInput formControlName="service_State">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Service Address Zipcode</mat-label>
+                                  <input matInput formControlName="service_zipcode">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Type of Appliance Installed</mat-label>
+                                  <select matNativeControl required>
+                                    <option value="Clothes Dryer">Clothes Dryer</option>
+                                    <option value="Furnace">Furnace</option>
+                                    <option value="Range">Range</option>
+                                    <option value="Tank Water Heater">Tank Water Heater</option>
+                                    <option value="Tank Water Heater - High Efficiency">Tank Water Heater - High Efficiency</option>
+                                    <option value="Tankless Water Heater">Tankless Water Heater</option>
+                                  </select>
+                                </mat-form-field>
+                                &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;
+
+
+                                <mat-form-field>
+                                  <mat-label>Purchased From</mat-label>
+                                  <input matInput formControlName="state">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Purchased City</mat-label>
+                                  <input matInput formControlName="state">
+                                  <mat-hint>Purchased City is the City/Location in which the item was purchased, if purchased Online or
+                                    from Contractor directly, please enter Online or Contractor.
+                                  </mat-hint>
+                                </mat-form-field>
+
+
+                                <mat-form-field>
+                                  <mat-label>Manufacturer</mat-label>
+                                  <input matInput formControlName="state">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Serial Number</mat-label>
+                                  <input matInput formControlName="state">
+                                </mat-form-field>
+
+
+                                <mat-form-field>
+                                  <mat-label>Model Number</mat-label>
+                                  <input matInput formControlName="state">
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Installer</mat-label>
+                                  <input matInput formControlName="state">
+                                </mat-form-field>
+
+
+                                <mat-form-field>
+                                  <mat-label>Previous Appliance Product</mat-label>
+                                  <input matInput formControlName="state">
+                                  <mat-hint>If New Construction or Unknown put N/A</mat-hint>
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Previous Appliance Manufacturer</mat-label>
+                                  <input matInput formControlName="state">
+                                  <mat-hint>If New Construction or Unknown put N/A</mat-hint>
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                  <mat-label>Previous Appliance Model Number</mat-label>
+                                  <input matInput formControlName="state">
+                                  <mat-hint>If New Construction or Unknown put N/A</mat-hint>
+                                </mat-form-field>-->
+              </form>
+              <div class="btn_group">
+                <button mat-raised-button matStepperPrevious color="primary">Back</button>
+                <button mat-raised-button matStepperNext color="primary">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step label="Add Contact Lens Product(S)">
+
+        <mat-card>
+          <mat-card-content>
+            <mat-form-field class="product">
+              <mat-label>Include toric / multifocal (if applicable)</mat-label>
+              <mat-select>
+                <mat-optgroup *ngFor="let group of models" [label]="group.name">
+                  <mat-option *ngFor="let item of group.lists" [value]="item">
+                    {{item.name}}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="product">
+              <mat-label>Price (before tax including discounts)</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-content class="line" *ngIf="showProduct2">
+            <button mat-raised-button color="warn" class="mb-3" (click)="showProduct2=false">Remove</button>
+            <mat-form-field class="product">
+              <mat-label>Include toric / multifocal (if applicable)</mat-label>
+              <mat-select>
+                <mat-optgroup *ngFor="let group of models" [label]="group.name">
+                  <mat-option *ngFor="let item of group.lists" [value]="item">
+                    {{item.name}}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="product">
+              <mat-label>Price (before tax including discounts)</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </mat-card-content>
+
+          <mat-card-content class="line">
+            <button mat-raised-button color="primary" (click)="add()">Add Another Product</button>
+          </mat-card-content>
+        </mat-card>
+
+        <div class="btn_group">
+          <button mat-raised-button matStepperPrevious color="primary">Back</button>
+          <button mat-raised-button matStepperNext (click)="getData()" color="primary">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Donate part">
+        <div class="max-w-3xl">
+          <h2>Did you know? You can donate part of your rebate to provide sight to millions. Learn more at
+            coopervision.com/ogs.</h2>
+          <p>Select one option:</p>
+          <div class="donate_wrapper">
+            <div class="donate_list" *ngFor="let pro of programsList">
+              <div class="image">
+                <img [src]="pro.resources.imageUrl" alt="">
+              </div>
+              <div class="info">
+                <div class="title">
+                  {{pro.description}}
+                </div>
+                <div class="amount">
+                  <span>You will receive:</span>
+                  <p>${{(pro.rebateAmount).toFixed(2)}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn_group">
+          <button mat-raised-button matStepperPrevious color="primary">Back</button>
+          <button mat-raised-button matStepperNext (click)="getData()" color="primary">Next</button>
+        </div>
+      </mat-step>
+      <!--
+          <mat-step label="File upload">
+
+
+            <div class="grid_col">
+              <div class="left_chat">
+
+                <div>
+                  <h4>Required Documents Purchaser Information, Service Address Information and Product/Appliance Information
+                    for each new appliance.</h4>
+                  <ol class="row_files">
+                    <li>
+                      <p>Current Natural Gas billing statement ‐ For account number reference.</p>
+                      <input [accept]="file_types" type="file" >
+
+                    </li>
+                    <li>
+                      <p>Proof of Purchase ‐ A store/register receipt from a retailer or an invoice from a
+                        builder/contractor.</p>
+                      <input [accept]="file_types" type="file" >
+
+                    </li>
+
+                    <li>
+                      <p>Proof Of Installation for the qualifying appliance ‐ A store/register receipt from a retailer
+                        including
+                        installation charges or an installation invoice from a builder/contractor documenting the service
+                        address where the appliance was installed.</p>
+                      <input [accept]="file_types" type="file" >
+
+                    </li>
+                  </ol>
+                  <h4>*Please make sure that one or both of these receipts show the equipment model and serial number.
+                    You will need the serial number from the purchased appliance(s) and legible .jpg, .png, .pdf, .doc, .docx,
+                    .txt (maximum size per file 25.0 MB) copy(s) of your detailed sales receipt(s). The sales receipt(s) must
+                    include the following:</h4>
+
+                  <ul>
+                    <li>Purchased from</li>
+                    <li>Purchase date</li>
+                    <li>Model Number(s)</li>
+                    <li>Purchase price</li>
+
+                  </ul>
+
+                  <input type="file" [accept]="file_types" >
+                  <br><br><br>
+                </div>
+
+
+                <div class="btn_group">
+                  <button mat-raised-button matStepperPrevious color="primary">Back</button>
+                  <button mat-raised-button matStepperNext (click)="setPreview()" color="primary">Next</button>
+                </div>
+              </div>
+            </div>
+          </mat-step>-->
+
+      <mat-step label="Last few questions">
+        <div class="container">
+          <section class="my_from">
+
+            <div class="field">
+              <label>Are you new to contact lenses?</label>
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group>
+
+            </div>
+
+
+            <div class="field">
+              <label>Are you new to CooperVision®?</label>
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Yes</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+                <mat-radio-button value="3">I don't know</mat-radio-button>
+              </mat-radio-group>
+
+            </div>
+
+
+            <div class="field">
+              <label>What brand of contact lenses have you worn previously?</label>
+              <mat-form-field class="product">
+                <mat-label>your brand of contact lenses</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let item of lensesLists" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+
+
+            <div class="field">
+              <label>Please share the age of the contact lens wearer.</label>
+              <mat-form-field class="product">
+                <mat-label>your age</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let item of ageLists" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+
+
+            <div class="field">
+              <label>Please share your gender identity. Choose only one answer.</label>
+              <mat-form-field class="product">
+                <mat-label>your gender</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let item of genderLists" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+          </section>
+        </div>
+
+        <div class="btn_group">
+          <button mat-raised-button matStepperPrevious color="primary">Back</button>
+
+          <button mat-raised-button matStepperNext color="primary">Next and Preview</button>
+        </div>
+      </mat-step>
+      <mat-step label="Check final and submit">
+
+
+        <div class="btn_group">
+          <button mat-raised-button matStepperPrevious color="primary">Back</button>
+
+          <button mat-raised-button color="primary">Submit</button>
+        </div>
+      </mat-step>
+
+    </mat-stepper>
+
+
+  </div>
+</div>

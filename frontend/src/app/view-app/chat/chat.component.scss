@@ -1,0 +1,56 @@
+.grid_col{
+  display: grid;
+  height: calc(100% - 64px);
+  grid-template-columns: 1fr 1fr;
+  .left_chat{
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 15px;
+    gap: 10px;
+    .chat_list{
+      background: #f1f1f14f;
+      padding: 15px;
+      height: calc(100vh - 300px);
+      overflow: auto;
+
+      div.chat{
+        margin-bottom: 20px;
+        span{
+          background: #cacacae0;
+          display: block;
+          max-width: 80%;
+          padding: 10px;
+          border-radius: 10px;
+        }
+
+        &.user {
+          display: flex;
+          justify-content: flex-end;
+          span {
+            background: rgb(63 81 181);
+            color: white;
+          }
+        }
+
+      }
+    }
+    .chat-form{
+      display: grid;
+      grid-template-columns: 75% 1fr;
+      align-items: center;
+      gap: 10px;
+      button{
+        height: 55px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .from_field{
+    .my_from{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 10px;
+    }
+  }
+}

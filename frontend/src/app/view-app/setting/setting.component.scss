@@ -1,0 +1,30 @@
+@tailwind components;
+
+.main{
+  @apply p-4;
+  .info{
+    @apply flex items-center gap-5 flex-col md:flex-row;
+    .photo{
+      @apply w-40 h-40 bg-white rounded-full border-gray-300 border-8 bg-no-repeat bg-contain bg-center ;
+    }
+    .btn-group{
+      input{
+        @apply hidden;
+      }
+      @apply grid justify-items-start gap-2;
+    }
+  }
+
+  .profile-info {
+    @apply max-w-2xl flex gap-5 mt-8 flex-wrap;
+    .input-data {
+      @apply w-full grid;
+      &.half{
+        @apply md:w-[calc(50%-10px)];
+      }
+      input {
+        @apply border rounded-md px-2 py-3;
+      }
+    }
+  }
+}

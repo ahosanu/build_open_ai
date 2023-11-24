@@ -1,0 +1,50 @@
+<mat-card >
+
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="btns">
+    <a mat-fab extended routerLink="/login" class="google">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path fill="white" d="M22.602 10.004a1 1 0 0 0-.984-.822H12.2a1 1 0 0 0-1 1v3.868a1 1 0 0 0 1 1h3.962a3.656 3.656 0 0 1-1.131 1.187 5.06 5.06 0 0 1-2.831.786 4.936 4.936 0 0 1-4.646-3.438v-.002a4.904 4.904 0 0 1 0-3.167v-.002A4.936 4.936 0 0 1 12.2 6.978a4.378 4.378 0 0 1 3.131 1.217 1 1 0 0 0 1.399-.015l2.868-2.868a1 1 0 0 0-.025-1.439A10.624 10.624 0 0 0 12.2 1a10.95 10.95 0 0 0-9.829 6.059l-.001.002A10.922 10.922 0 0 0 1.2 12a11.079 11.079 0 0 0 1.17 4.94l.001.001A10.95 10.95 0 0 0 12.2 23a10.526 10.526 0 0 0 7.295-2.687l.001-.001a10.785 10.785 0 0 0 3.304-8.084c0-.746-.066-1.49-.198-2.224ZM12.2 3a8.683 8.683 0 0 1 5.209 1.673l-1.454 1.453A6.463 6.463 0 0 0 12.2 4.978a6.887 6.887 0 0 0-5.99 3.55L5.142 7.7l-.585-.454A8.953 8.953 0 0 1 12.2 3ZM3.68 14.903a9.03 9.03 0 0 1 0-5.806l1.782 1.382a6.854 6.854 0 0 0 0 3.042l-1.783 1.382ZM12.2 21a8.953 8.953 0 0 1-7.644-4.246l.379-.294 1.276-.99a6.885 6.885 0 0 0 5.989 3.553 7.278 7.278 0 0 0 3.306-.751l1.691 1.313A8.89 8.89 0 0 1 12.2 21Zm6.526-2.76-.183-.143-1.377-1.069a5.607 5.607 0 0 0 1.4-2.795 1 1 0 0 0-.984-1.183H13.2v-1.868h7.549c.034.345.051.695.051 1.046a9.052 9.052 0 0 1-2.074 6.011Z"/>
+      </svg>
+      Sign in with Google
+    </a>
+
+    <a mat-fab extended routerLink="/login" class="fb">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path fill="white" d="M15.12 5.32H17V2.14A26.113 26.113 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V7.05c0-1.05.28-1.73 1.76-1.73Z"/>
+      </svg>
+      Sign in with Facebook
+    </a>
+  </mat-card-content>
+
+
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>User Name</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <section class="check">
+      <mat-checkbox class="example-margin" [(ngModel)]="checked">Remember</mat-checkbox>
+      <a href="">Forgot Password?</a>
+    </section>
+
+  </mat-card-content>
+
+  <mat-card-footer>
+
+    <a mat-fab extended routerLink="/view-app/" class="login" color="primary">
+
+      Sign in Now
+    </a>
+  </mat-card-footer>
+</mat-card>

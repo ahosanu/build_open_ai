@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .content{
+    @apply shadow-r1 bg-white text-center rounded-md px-2 py-8 flex flex-col items-center gap-3 cursor-pointer border border-transparent hover:border-gray-300;
+
+    .logo{
+      @apply h-[60px] w-full bg-no-repeat bg-center bg-contain;
+    }
+    .title{
+      @apply text-lg;
+    }
+    .status{
+      @apply text-[13px] uppercase bg-r1-green text-white py-1.5 px-6 rounded-full;
+      &.not{
+        @apply bg-[#e3e3e3] text-black normal-case;
+      }
+    }
+  }
+}
+

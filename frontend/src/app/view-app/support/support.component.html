@@ -1,0 +1,21 @@
+<div class="grid_col">
+  <div class="left_chat">
+
+    <div class="chat_list">
+      <div *ngFor="let item of messages" class="chat" [class]="item.role">
+        <span>
+          {{item.content}}
+        </span>
+      </div>
+    </div>
+    <div class="chat-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Enter Message</mat-label>
+        <input matInput [formControl]="message" placeholder="Enter your message" (keyup.enter)="getMessage()">
+      </mat-form-field>
+      <button mat-raised-button (click)="getMessage()" color="primary">Submit</button>
+    </div>
+
+  </div>
+
+</div>

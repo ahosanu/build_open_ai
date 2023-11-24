@@ -1,0 +1,25 @@
+.example-spacer {
+  flex: 1 1 auto; }
+
+.loading {
+  position: fixed;
+  display: none;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: #d8d8d887;
+  z-index: 99999; }
+
+.loading.show {
+  display: flex; }
+
+.mat-drawer-container {
+  height: calc(100svh - 64px); }
+  .mat-drawer-container mat-list-item.active {
+    background: #3f51b5; }
+    .mat-drawer-container mat-list-item.active .mat-mdc-list-item-title {
+      color: white; }
+
+/*# sourceMappingURL=app.component.css.map */

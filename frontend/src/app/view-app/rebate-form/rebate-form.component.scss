@@ -1,0 +1,120 @@
+@tailwind components;
+
+@layer components {
+  .main {
+    @apply grid h-full grid-rows-[auto_1fr];
+  }
+
+  header {
+    @apply flex justify-between items-center p-4 shadow-r1 bg-white border-b z-10;
+    h2 {
+      @apply text-xl;
+    }
+
+    img {
+      max-height: 50px;
+    }
+  }
+
+  .content {
+    mat-stepper {
+      @apply bg-transparent;
+    }
+
+    /* .eligibility{
+       @apply text-7xl;
+     }*/
+
+
+    .btn_group {
+      @apply flex gap-5 mt-5;
+    }
+  }
+
+  .my_from {
+    @apply grid gap-3 max-w-4xl;
+    .field {
+      @apply flex flex-col gap-2 my-2;
+    }
+  }
+
+  .file-upload {
+    @apply max-w-2xl;
+    .upload {
+      @apply w-3/4 border border-gray-400 grid justify-center items-center rounded-md p-5;
+      p {
+        @apply m-0 text-xl;
+        &.af {
+          @apply text-xs text-gray-400 text-center;
+        }
+      }
+
+      .material-icons {
+        @apply text-center text-4xl;
+      }
+
+    }
+
+    .file {
+      @apply grid grid-cols-[50px_auto] relative w-1/2 border border-gray-400 rounded-md p-5 mt-2.5;
+      p {
+        @apply m-0;
+        &.name {
+          @apply font-medium;
+        }
+      }
+
+      .file_info {
+        @apply text-4xl;
+      }
+
+      .close {
+        @apply absolute top-2 right-2;
+      }
+    }
+
+    input {
+      @apply hidden;
+    }
+  }
+
+  mat-option {
+    .display {
+      @apply grid grid-cols-[auto_250px];
+      .address {
+        @apply text-xs;
+      }
+    }
+  }
+
+  mat-card {
+    @apply max-w-2xl gap-5;
+    mat-card-content.line {
+      @apply border-t border-gray-300 pt-4;
+    }
+  }
+
+  .product {
+    @apply w-full;
+  }
+
+  .donate_wrapper {
+    @apply grid gap-5;
+    .donate_list {
+      @apply p-4 bg-white border border-gray-400 shadow-xl rounded-md grid grid-cols-[200px_auto] gap-5;
+      .info {
+        @apply grid grid-cols-[auto_100px];
+
+        .title{
+          @apply font-medium text-lg;
+        }
+        .amount {
+          @apply text-xs;
+          p {
+            @apply font-medium text-xl;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<div class="main">
+  <div class="list">
+
+    <app-rebate-item  *ngFor="let item of allData.rebateList"  (click)="openLogin(item)" [title]="item.title" [logo]="item.logo" [status]="item.status"></app-rebate-item>
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+@tailwind components;
+
+@layer components {
+  .main{
+    @apply grid h-full grid-rows-[auto_1fr];
+  }
+  header {
+    @apply flex justify-between items-center p-4 shadow-r1 bg-white border-b z-10;
+    h2 {
+      @apply text-xl;
+    }
+
+    button{
+      @apply px-4;
+    }
+  }
+
+  .content {
+    mat-stepper {
+      @apply bg-transparent;
+    }
+    /* .eligibility{
+       @apply text-7xl;
+     }*/
+
+
+    .btn_group{
+      @apply flex gap-5 mt-5;
+    }
+
+    .status{
+      @apply rounded-full px-4 py-1 uppercase text-xs;
+      &.complete{
+        @apply bg-r1-green text-white;
+      }
+      &.pending{
+        @apply bg-blue-400 text-white;
+      }
+
+      &.draft{
+        @apply bg-yellow-500 text-black;
+      }
+      &.error{
+        @apply bg-red-400 text-white;
+      }
+
+    }
+  }
+
+  .my_from {
+    @apply grid gap-4 max-w-4xl;
+    .field {
+      @apply flex flex-col gap-2;
+    }
+  }
+}

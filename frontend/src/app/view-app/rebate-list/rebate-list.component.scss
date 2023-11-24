@@ -1,0 +1,11 @@
+
+@tailwind components;
+
+@layer components {
+  .main {
+    @apply p-8 relative h-full;
+    .list {
+      @apply grid grid-cols-4 gap-6;
+    }
+  }
+}

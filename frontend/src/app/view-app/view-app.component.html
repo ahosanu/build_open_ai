@@ -1,0 +1,37 @@
+<div class="loading" [class]="api.show? 'show' : ''">
+  <mat-spinner></mat-spinner>
+</div>
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My Test Chat App</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened #drawer style="width: 250px;">
+    <mat-nav-list>
+      <mat-list-item routerLink="/view-app/new_rebate" routerLinkActive="active">
+        <span matListItemTitle>New rebate claim</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/view-app/rebate_history"  routerLinkActive="active">
+        <span matListItemTitle>Previous rebate history</span>
+      </mat-list-item>
+     <!-- <mat-list-item routerLink="/view-app/support"  routerLinkActive="active">
+        <span matListItemTitle>Human support</span>
+      </mat-list-item>-->
+      <mat-list-item routerLink="/view-app/setting"  routerLinkActive="active">
+        <span matListItemTitle>Profile Setting</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/login"  routerLinkActive="active">
+        <span matListItemTitle>Logout</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+</mat-drawer-container>
+
+<app-alert></app-alert>

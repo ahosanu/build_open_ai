@@ -1,0 +1,15 @@
+@tailwind components;
+
+
+.alert{
+  @apply fixed top-3 transition-all duration-700 right-[-9999px] z-50 bg-green-600 text-white px-8 py-5 min-w-[400px] rounded-lg shadow-xl text-xl flex justify-between items-center select-none;
+  &.show{
+    @apply right-3;
+  }
+  p{
+    @apply m-0;
+  }
+  span{
+    @apply bg-white/30 p-1 rounded-md hover:bg-white/40 cursor-pointer ;
+  }
+}
