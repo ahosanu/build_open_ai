@@ -22,4 +22,4 @@ RUN mv /usr/src/app/frontend/dist/app_ui /usr/src/app/backend/app_ui
 EXPOSE 80
 
 # Run the application
-CMD ["npm", "start"]
+CMD ["node", "./index.js"]
