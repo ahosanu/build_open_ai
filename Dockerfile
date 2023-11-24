@@ -12,6 +12,8 @@ COPY ./backend /usr/src/app/backend
 RUN cd frontend && npm install
 RUN cd backend && npm install
 
+RUN mkdir -p /usr/src/app/backend/app_ui
+
 COPY /usr/src/app/frontend/dist/app_ui /usr/src/app/backend/app_ui
 
 WORKDIR /usr/src/app/backend
