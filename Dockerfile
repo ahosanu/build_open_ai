@@ -1,5 +1,5 @@
 # Use a node base image
-FROM node:14
+FROM node:latest
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -14,6 +14,7 @@ RUN cd backend && npm install
 
 COPY --from=builder /usr/src/app/frontend/dist/app_ui /usr/src/app/backend/app_ui
 
+WORKDIR /usr/src/app/backend
 EXPOSE 80
 
 # Run the application
