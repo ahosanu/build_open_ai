@@ -16,7 +16,7 @@ RUN ng build
 WORKDIR /usr/src/app/backend
 
 RUN npm install
-COPY /usr/src/app/frontend/dist/app_ui /usr/src/app/backend/app_ui
+#COPY /usr/src/app/frontend/dist/app_ui /usr/src/app/backend/app_ui
 
 
 EXPOSE 80
