@@ -1,5 +1,5 @@
-# Use a node base image
-FROM node:latest
+# Use official node image as the base image
+FROM node:latest as build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
