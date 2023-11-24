@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cors())
-const port = 3500; // Choose a port for your Express server
+const port = 80; // Choose a port for your Express server
 
 app.use(express.static(path.join(__dirname, 'app_ui')));
 
