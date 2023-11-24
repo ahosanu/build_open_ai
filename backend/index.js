@@ -2586,10 +2586,8 @@ app.get('/api/login', async (req, res) => {
 
     try {
         const browser = await puppeteer.launch({
-            executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-            headless: false, defaultViewport: false, args: [
-                //"--no-sandbox", // Add this flag to disable the sandbox
-                //"--disable-setuid-sandbox",
+            headless: 'new', 
+            defaultViewport: false, args: [
                 "--enable-blink-features=WebCodecs",
                 "--enable-experimental-web-platform-features",
                 "--file-handling-api",
