@@ -9,7 +9,7 @@ COPY ./frontend /usr/src/app/frontend
 COPY ./backend /usr/src/app/backend
 
 # Install dependencies for both frontend and backend
-RUN cd frontend && npm install
+RUN cd frontend && npm install && ng build
 RUN cd backend && npm install
 
 RUN mkdir -p /usr/src/app/backend/app_ui
