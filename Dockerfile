@@ -1,5 +1,5 @@
 # Use official node image as the base image
-FROM node:20 as build
+FROM node as build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -11,7 +11,7 @@ COPY ./backend /usr/src/app/backend
 WORKDIR /usr/src/app/frontend
 # Install dependencies for both frontend and backend
 RUN npm install 
-RUN ng build
+RUN npm run build
 
 WORKDIR /usr/src/app/backend
 
