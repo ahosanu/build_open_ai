@@ -1,5 +1,5 @@
 # Use official node image as the base image
-FROM node:latest as build
+FROM node:20 as build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -12,7 +12,7 @@ COPY ./backend /usr/src/app/backend
 RUN cd frontend && npm install
 RUN cd backend && npm install
 
-COPY --from=builder /usr/src/app/frontend/dist/app_ui /usr/src/app/backend/app_ui
+COPY /usr/src/app/frontend/dist/app_ui /usr/src/app/backend/app_ui
 
 WORKDIR /usr/src/app/backend
 EXPOSE 80
